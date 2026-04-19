@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { providerDetails } from "@/app/lib/oss-data";
+
 function GithubIcon() {
   return (
     <svg
@@ -47,13 +50,13 @@ function GitlabIcon() {
 
 const providers = [
   {
-    name: "GitHub",
+    ...providerDetails.github,
     icon: <GithubIcon />,
     className:
       "border-zinc-700 bg-[#1f2328] text-white hover:bg-[#2a2f36] focus-visible:outline-orange-300",
   },
   {
-    name: "GitLab",
+    ...providerDetails.gitlab,
     icon: <GitlabIcon />,
     className:
       "border-zinc-700 bg-[#1f2328] text-white hover:bg-[#2a2f36] focus-visible:outline-orange-300",
@@ -63,7 +66,7 @@ const providers = [
 export default function Home() {
   return (
     <main className="flex min-h-screen items-center justify-center  px-6 py-16 text-white">
-      <section className="w-full max-w-md rounded-3xl border border-white/10 bg-black/25 p-8  ">
+      <section className="w-full max-w-md rounded-3xl border border-white/10 bg-black/25 p-8">
         <div className="mx-auto flex w-fit items-center gap-4 rounded-full border border-white/10 bg-white/5 px-5 py-3">
           <GithubIcon />
           <span className="text-zinc-500">+</span>
@@ -85,16 +88,21 @@ export default function Home() {
 
         <div className="mt-10 flex flex-col gap-4">
           {providers.map((provider) => (
-            <button
-              key={provider.name}
-              type="button"
+            <Link
+              key={provider.id}
+              href={provider.callbackPath}
               className={`flex h-14 items-center justify-center gap-3 rounded-2xl border px-5 text-base font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 ${provider.className}`}
             >
               {provider.icon}
               <span>Connect with {provider.name}</span>
-            </button>
+            </Link>
           ))}
         </div>
+
+        <p className="mt-6 text-center text-xs leading-5 text-zinc-500">
+          Backend auth endpoints are ready at <code>/api/auth/github</code> and{" "}
+          <code>/api/auth/gitlab</code> for your later integration.
+        </p>
       </section>
     </main>
   );
