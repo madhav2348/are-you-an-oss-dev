@@ -1,6 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) app for checking OSS eligibility through provider login.
 
 ## Getting Started
+
+Create a local env file before starting the app:
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in at least:
+
+```bash
+GITHUB_CLIENT_ID=...
+GITHUB_CLIENT_SECRET=...
+```
+
+Optional settings:
+
+```bash
+OSS_ORG_FOLLOWER_THRESHOLD=90
+OSS_GITHUB_SEARCH_PAGES=2
+```
 
 First, run the development server:
 
@@ -16,9 +36,11 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+GitHub OAuth uses `/api/auth/github` as the callback route by default. If your GitHub OAuth app is configured with a fixed callback URL, set `GITHUB_REDIRECT_URI` in `.env.local` to match it exactly.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+After login, the app checks merged pull requests authored by the signed-in user, keeps the organization-owned repos, fetches each organization's follower count, and shows `Sorry` when none of those organizations meet the follower threshold.
+
+You can start editing the UI in `app/page.tsx`. The page auto-updates as you edit the file.
 
 ## Learn More
 

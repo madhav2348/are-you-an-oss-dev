@@ -90,7 +90,7 @@ export default function Home() {
           {providers.map((provider) => (
             <Link
               key={provider.id}
-              href={provider.callbackPath}
+              href={provider.connectPath}
               className={`flex h-14 items-center justify-center gap-3 rounded-2xl border px-5 text-base font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 ${provider.className}`}
             >
               {provider.icon}
@@ -100,8 +100,8 @@ export default function Home() {
         </div>
 
         <p className="mt-6 text-center text-xs leading-5 text-zinc-500">
-          Backend auth endpoints are ready at <code>/api/auth/github</code> and{" "}
-          <code>/api/auth/gitlab</code> for your later integration.
+          GitHub OAuth now starts at <code>/api/auth/github</code>. GitLab is
+          still stubbed at <code>/api/auth/gitlab</code>.
         </p>
       </section>
     </main>

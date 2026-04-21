@@ -9,7 +9,8 @@ export type ContributionOrg = {
 export type ProviderDetails = {
   id: ProviderId;
   name: string;
-  callbackPath: string;
+  connectPath: string;
+  successPath: string;
   contributions: ContributionOrg[];
 };
 
@@ -17,7 +18,8 @@ export const providerDetails: Record<ProviderId, ProviderDetails> = {
   github: {
     id: "github",
     name: "GitHub",
-    callbackPath: "/success/github",
+    connectPath: "/api/auth/github",
+    successPath: "/success/github",
     contributions: [
       { name: "vercel", mergedCount: 6, mergedLabel: "merged pull requests" },
       { name: "tailwindlabs", mergedCount: 4, mergedLabel: "merged pull requests" },
@@ -27,7 +29,8 @@ export const providerDetails: Record<ProviderId, ProviderDetails> = {
   gitlab: {
     id: "gitlab",
     name: "GitLab",
-    callbackPath: "/success/gitlab",
+    connectPath: "/api/auth/gitlab",
+    successPath: "/success/gitlab",
     contributions: [
       { name: "gitlab-org", mergedCount: 5, mergedLabel: "merged merge requests" },
       { name: "freedesktop", mergedCount: 3, mergedLabel: "merged merge requests" },
